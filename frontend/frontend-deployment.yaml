@@ -3,6 +3,7 @@ kind: Deployment
 
 metadata:
   name: frontend
+  namespace: aks-app
 
 spec:
   replicas: 2
