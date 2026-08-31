@@ -20,6 +20,7 @@ spec:
     spec:
       containers:
         - name: backend
+
           image: ghcr.io/proptisharma-07/aks-app-backend:v1
           imagePullPolicy: IfNotPresent
 
@@ -28,16 +29,10 @@ spec:
 
           env:
             - name: DATABASE_URL
-              valueFrom:
-                secretKeyRef:
-                  name: database-secret
-                  key: DATABASE_URL
+              value: "YOUR_DATABASE_URL"
 
             - name: JWT_SECRET
-              valueFrom:
-                secretKeyRef:
-                  name: database-secret
-                  key: JWT_SECRET
+              value: "YOUR_JWT_SECRET"
 
             - name: DB_SSL
               value: "false"
@@ -50,6 +45,15 @@ spec:
 
             - name: CORS_ORIGIN
               value: "*"
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
 
           readinessProbe:
             httpGet:
@@ -68,11 +72,3 @@ spec:
             periodSeconds: 20
             timeoutSeconds: 3
             failureThreshold: 3
-
-          resources:
-            requests:
-              cpu: "100m"
-              memory: "128Mi"
-            limits:
-              cpu: "500m"
-              memory: "512Mi"
