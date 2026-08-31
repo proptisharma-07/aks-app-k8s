@@ -20,8 +20,9 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: ghcr.io/proptisharma-07/aks-app:v2
-          imagePullPolicy: Always
+
+          image: ghcr.io/proptisharma-07/aks-app:v1
+          imagePullPolicy: IfNotPresent
 
           ports:
             - containerPort: 80
